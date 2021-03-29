@@ -10,8 +10,9 @@ to install the app
 
 https://pip.pypa.io/en/stable/installing/    
 to get the packages for python to use
-after installing pip to get a package you just type 
-pip *package_name*    ***then press enter***
+after installing pip to get a package...
+open your terminal/shell/or command prompt ) 
+type: pip *package_name*    ***then press enter*** 
 
 the list of imports to install:
 easygui 
