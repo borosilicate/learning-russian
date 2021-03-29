@@ -10,7 +10,15 @@ to install the app
 
 https://pip.pypa.io/en/stable/installing/    
 to get the packages for python to use
+after installing pip to get a package you just type 
+pip *package_name*    ***then press enter***
 
+the list of imports to install:
+easygui 
+pandas
+numpy
+random
+glob
 
 #Timestamp: 2021-03-29 21:52:07 
 Added: 
