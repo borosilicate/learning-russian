@@ -28,10 +28,13 @@ datasets['colors'].head()
 '''
 
 temp=easygui.multchoicebox("Pick the lists to study",title,lists)
-print('lists = ',temp)
-df=pd.read_csv('code_name_final.csv', sep=',',header=None)
-#print(df.values)
-size=399
+here=[]
+for lists in temp:
+    here+=pd.read_csv('CSVs/'+lists+'.csv', sep=',',header=None)
+df=pd.concat(here)
+print(df.head)    
+size=len(df)
+
 while(True):
     word=random.randint(0, size)
     a=word
@@ -52,7 +55,7 @@ while(True):
     l = list(tup)
     random.shuffle(l)
     tup=tuple(l)
-    image="./pictures/street.jpeg"
+    image="./pictures/"+e_ans+".jpg"
     out=easygui.buttonbox('Click on the word '+r_ans, image=image, choices=tup) 
     print(out,"  ",e_ans)
     if(out==e_ans):
