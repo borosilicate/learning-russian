@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import glob
 import random
+import os
 title="Time to Study!"
 lists=('codenames','city','family','animals','kitchen','nature','professions')
 path = '~/Downloads/unsplash-research-dataset-lite-latest/'
@@ -28,15 +29,18 @@ datasets['colors'].head()
 '''
 
 temp=easygui.multchoicebox("Pick the lists to study",title,lists)
-here=[]
+here=()
+p_type=[]
 for lists in temp:
-    here+=pd.read_csv('CSVs/'+lists+'.csv', sep=',',header=None)
+    out=pd.read_csv('CSVs/'+lists+'.csv', sep=',',header=None)
+    here=here+(out,)
+    p_type+=[lists]*( len(out) )
 df=pd.concat(here)
 print(df.head)    
-size=len(df)
+size=len(df)-1
 
 while(True):
-    word=random.randint(0, size)
+    word=random.randint(0, size-1)
     a=word
     b=0
     c=0
@@ -45,20 +49,20 @@ while(True):
         b=random.randint(0, size)
         c=random.randint(0, size)
         d=random.randint(0, size)
-    r_ans=df.values[word,0]
-    e_ans=df.values[word,1]
-    e_a=df.values[a,1]
-    e_b=df.values[b,1]
-    e_c=df.values[c,1]
-    e_d=df.values[d,1]
+    r_ans=df.values[word,1]
+    e_ans=df.values[word,0]
+    e_a=df.values[a,0]
+    e_b=df.values[b,0]
+    e_c=df.values[c,0]
+    e_d=df.values[d,0]
     tup =(e_a,e_b,e_c,e_d,e_ans) 
     l = list(tup)
     random.shuffle(l)
     tup=tuple(l)
-    image="./pictures/"+e_ans+".jpg"
-    out=easygui.buttonbox('Click on the word '+r_ans, image=image, choices=tup) 
-    print(out,"  ",e_ans)
+    image="./pictures/"+p_type[word]+"/"+r_ans.replace(" ", "_")+".jpg"
+    out=easygui.buttonbox('Click on the word '+e_ans, image=image, choices=tup) 
+    print(out,"  ",r_ans)
     if(out==e_ans):
-        print('Great Job:'+r_ans+"  = "+out)
+        print('Great Job:'+e_ans+"  = "+out)
     else:
         print('Nice  Try:'+r_ans+" == "+e_ans+"    Not "+out)
